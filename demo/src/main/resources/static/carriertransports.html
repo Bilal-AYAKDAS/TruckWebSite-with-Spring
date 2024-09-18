@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tourist - Travel Agency HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .container2 {
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modalh2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modalLabel {
+            font-weight: bold;
+        }
+
+        .modal-textarea {
+            width: 98%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .modalButton {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modalButton:hover {
+            background-color: #218838;
+        }
+
+        #response {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .modal {
+            display: none; /* Modal başlangıçta gizli */
+            position: fixed; /* Sabit konum */
+            z-index: 1000; /* Üstte görünmesi için */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0,0,0); /* Fallback renk */
+            background-color: rgba(0,0,0,0.4); /* Siyah arka plan, opaklık */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            margin-left: 30%;
+            margin-right:30%;
+            /* Ortalamak için */
+            padding: 20px;
+            border: 1px solid #888;
+            width:40%; /* Genişlik */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-fluid position-relative p-0">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+            <a href="" class="navbar-brand p-0">
+                <h1 class="text-primary m-0"><i class="fa fa-truck-moving"></i>Tırcım</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link ">Anasayfa</a>
+                    <a href="about.html" class="nav-item nav-link">Hakkımızda</a>
+                    <a href="news.html" class="nav-item nav-link">Haberler</a>
+                    <a href="transports.html" class="nav-item nav-link">Nakliyatlar</a>
+                    <a href="carriertransports.html" class="nav-item nav-link active" id="transportList">Nakliyatlarım</a>
+                    <a href="adminnews.html" class="nav-item nav-link" id="newsList">Haberleri Yönet</a>
+                    <a href="#" class="nav-item nav-link" id="user-name"></a>
+                </div>
+                <a href="" class="btn btn-primary rounded-pill py-2 px-4" id="loginBtn">Giriş Yap</a>
+            </div>
+        </nav>
+
+        <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+            <div class="container py-5">
+                <div class="row justify-content-center py-5">
+                    <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                        <h1 class="display-3 text-white mb-3 animated slideInDown">Nakliyatlarım</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar & Hero End -->
+
+
+    <!-- Modal Start -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="container2" id="modalIframe">
+                <h2 class="modalh2">NAKLİYE KAYIT</h2>
+                <form id="newsForm">
+                    <input type="hidden" id="tripId" name="tripId">
+
+                    <label for="nereden" class="modalLabel">Nereden</label>
+                    <select  id="nereden" class="modal-textarea" name="nereden" required>
+                        <option value="Adana">Adana</option>
+                        <option value="Adıyaman">Adıyaman</option>
+                        <option value="Afyon">Afyon</option>
+                        <option value="Ağrı">Ağrı</option>
+                        <option value="Amasya">Amasya</option>
+                        <option value="Ankara">Ankara</option>
+                        <option value="Antalya">Antalya</option>
+                        <option value="Artvin">Artvin</option>
+                        <option value="Aydın">Aydın</option>
+                        <option value="Balıkesir">Balıkesir</option>
+                        <option value="Bilecik">Bilecik</option>
+                        <option value="Bingöl">Bingöl</option>
+                        <option value="Bitlis">Bitlis</option>
+                        <option value="Bolu">Bolu</option>
+                        <option value="Burdur">Burdur</option>
+                        <option value="Bursa">Bursa</option>
+                        <option value="Çanakkale">Çanakkale</option>
+                        <option value="Çankırı">Çankırı</option>
+                        <option value="Çorum">Çorum</option>
+                        <option value="Denizli">Denizli</option>
+                        <option value="Diyarbakır">Diyarbakır</option>
+                        <option value="Edirne">Edirne</option>
+                        <option value="Elazığ">Elazığ</option>
+                        <option value="Erzincan">Erzincan</option>
+                        <option value="Erzurum">Erzurum</option>
+                        <option value="Eskişehir">Eskişehir</option>
+                        <option value="Gaziantep">Gaziantep</option>
+                        <option value="Giresun">Giresun</option>
+                        <option value="Gümüşhane">Gümüşhane</option>
+                        <option value="Hakkari">Hakkari</option>
+                        <option value="Hatay">Hatay</option>
+                        <option value="Isparta">Isparta</option>
+                        <option value="Mersin">Mersin</option>
+                        <option value="İstanbul">İstanbul</option>
+                        <option value="İzmir">İzmir</option>
+                        <option value="Kars">Kars</option>
+                        <option value="Kastamonu">Kastamonu</option>
+                        <option value="Kayseri">Kayseri</option>
+                        <option value="Kırklareli">Kırklareli</option>
+                        <option value="Kırşehir">Kırşehir</option>
+                        <option value="Kocaeli">Kocaeli</option>
+                        <option value="Konya">Konya</option>
+                        <option value="Kütahya">Kütahya</option>
+                        <option value="Malatya">Malatya</option>
+                        <option value="Manisa">Manisa</option>
+                        <option value="Kahramanmaraş">Kahramanmaraş</option>
+                        <option value="Mardin">Mardin</option>
+                        <option value="Muğla">Muğla</option>
+                        <option value="Muş">Muş</option>
+                        <option value="Nevşehir">Nevşehir</option>
+                        <option value="Niğde">Niğde</option>
+                        <option value="Ordu">Ordu</option>
+                        <option value="Rize">Rize</option>
+                        <option value="Sakarya">Sakarya</option>
+                        <option value="Samsun">Samsun</option>
+                        <option value="Siirt">Siirt</option>
+                        <option value="Sinop">Sinop</option>
+                        <option value="Sivas">Sivas</option>
+                        <option value="Tekirdağ">Tekirdağ</option>
+                        <option value="Tokat">Tokat</option>
+                        <option value="Trabzon">Trabzon</option>
+                        <option value="Tunceli">Tunceli</option>
+                        <option value="Şanlıurfa">Şanlıurfa</option>
+                        <option value="Uşak">Uşak</option>
+                        <option value="Van">Van</option>
+                        <option value="Yozgat">Yozgat</option>
+                        <option value="Zonguldak">Zonguldak</option>
+                        <option value="Aksaray">Aksaray</option>
+                        <option value="Bayburt">Bayburt</option>
+                        <option value="Karaman">Karaman</option>
+                        <option value="Kırıkkale">Kırıkkale</option>
+                        <option value="Batman">Batman</option>
+                        <option value="Şırnak">Şırnak</option>
+                        <option value="Bartın">Bartın</option>
+                        <option value="Ardahan">Ardahan</option>
+                        <option value="Iğdır">Iğdır</option>
+                        <option value="Yalova">Yalova</option>
+                        <option value="Karabük">Karabük</option>
+                        <option value="Kilis">Kilis</option>
+                        <option value="Osmaniye">Osmaniye</option>
+                        <option value="Düzce">Düzce</option>
+                    </select>    <br>
+
+                    <label for="nereye" class="modalLabel">Nereye</label>
+                    <select  id="nereye" class="modal-textarea" name="nereye" required>
+                        <option value="Adana">Adana</option>
+                        <option value="Adıyaman">Adıyaman</option>
+                        <option value="Afyon">Afyon</option>
+                        <option value="Ağrı">Ağrı</option>
+                        <option value="Amasya">Amasya</option>
+                        <option value="Ankara">Ankara</option>
+                        <option value="Antalya">Antalya</option>
+                        <option value="Artvin">Artvin</option>
+                        <option value="Aydın">Aydın</option>
+                        <option value="Balıkesir">Balıkesir</option>
+                        <option value="Bilecik">Bilecik</option>
+                        <option value="Bingöl">Bingöl</option>
+                        <option value="Bitlis">Bitlis</option>
+                        <option value="Bolu">Bolu</option>
+                        <option value="Burdur">Burdur</option>
+                        <option value="Bursa">Bursa</option>
+                        <option value="Çanakkale">Çanakkale</option>
+                        <option value="Çankırı">Çankırı</option>
+                        <option value="Çorum">Çorum</option>
+                        <option value="Denizli">Denizli</option>
+                        <option value="Diyarbakır">Diyarbakır</option>
+                        <option value="Edirne">Edirne</option>
+                        <option value="Elazığ">Elazığ</option>
+                        <option value="Erzincan">Erzincan</option>
+                        <option value="Erzurum">Erzurum</option>
+                        <option value="Eskişehir">Eskişehir</option>
+                        <option value="Gaziantep">Gaziantep</option>
+                        <option value="Giresun">Giresun</option>
+                        <option value="Gümüşhane">Gümüşhane</option>
+                        <option value="Hakkari">Hakkari</option>
+                        <option value="Hatay">Hatay</option>
+                        <option value="Isparta">Isparta</option>
+                        <option value="Mersin">Mersin</option>
+                        <option value="İstanbul">İstanbul</option>
+                        <option value="İzmir">İzmir</option>
+                        <option value="Kars">Kars</option>
+                        <option value="Kastamonu">Kastamonu</option>
+                        <option value="Kayseri">Kayseri</option>
+                        <option value="Kırklareli">Kırklareli</option>
+                        <option value="Kırşehir">Kırşehir</option>
+                        <option value="Kocaeli">Kocaeli</option>
+                        <option value="Konya">Konya</option>
+                        <option value="Kütahya">Kütahya</option>
+                        <option value="Malatya">Malatya</option>
+                        <option value="Manisa">Manisa</option>
+                        <option value="Kahramanmaraş">Kahramanmaraş</option>
+                        <option value="Mardin">Mardin</option>
+                        <option value="Muğla">Muğla</option>
+                        <option value="Muş">Muş</option>
+                        <option value="Nevşehir">Nevşehir</option>
+                        <option value="Niğde">Niğde</option>
+                        <option value="Ordu">Ordu</option>
+                        <option value="Rize">Rize</option>
+                        <option value="Sakarya">Sakarya</option>
+                        <option value="Samsun">Samsun</option>
+                        <option value="Siirt">Siirt</option>
+                        <option value="Sinop">Sinop</option>
+                        <option value="Sivas">Sivas</option>
+                        <option value="Tekirdağ">Tekirdağ</option>
+                        <option value="Tokat">Tokat</option>
+                        <option value="Trabzon">Trabzon</option>
+                        <option value="Tunceli">Tunceli</option>
+                        <option value="Şanlıurfa">Şanlıurfa</option>
+                        <option value="Uşak">Uşak</option>
+                        <option value="Van">Van</option>
+                        <option value="Yozgat">Yozgat</option>
+                        <option value="Zonguldak">Zonguldak</option>
+                        <option value="Aksaray">Aksaray</option>
+                        <option value="Bayburt">Bayburt</option>
+                        <option value="Karaman">Karaman</option>
+                        <option value="Kırıkkale">Kırıkkale</option>
+                        <option value="Batman">Batman</option>
+                        <option value="Şırnak">Şırnak</option>
+                        <option value="Bartın">Bartın</option>
+                        <option value="Ardahan">Ardahan</option>
+                        <option value="Iğdır">Iğdır</option>
+                        <option value="Yalova">Yalova</option>
+                        <option value="Karabük">Karabük</option>
+                        <option value="Kilis">Kilis</option>
+                        <option value="Osmaniye">Osmaniye</option>
+                        <option value="Düzce">Düzce</option>
+                    </select>
+                    <br>
+
+                    <label for="tripDate"  class="modalLabel">Sevkiyat Tarihi:</label>
+                    <input type="datetime-local" id="tripDate" class="modal-textarea" name="tripDate" required><br>
+
+                    <label for="image"  class="modalLabel">Sevkiyat Resmi:</label>
+                    <input type="file" id="image" name="image" required><br>
+
+                    <label for="yukTipi" class="modalLabel">Yük Tipi</label>
+                    <select id="yukTipi" class="modal-textarea" name="yukTipi" required>
+                        <option value="Kuru Yük">Kuru Yük</option>
+                        <option value="Bozulabilecek Yiyecek">Bozulabilecek Yiyecek</option>
+                        <option value="Ağır Yük">Ağır Yük</option>
+                        <option value="Hassas Yük">Hassas Yük</option>
+                    </select><br>
+
+                    <label for="kapasite" class="modalLabel">Kapasite(kg)</label>
+                    <input type="number" id="kapasite" class="modal-textarea" name="kapasite" required><br>
+
+                    <button class="modalButton" type="button" onclick="tripPut()">KAYDET</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+
+    <!-- Trip Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Nakliyatlarım</h6>
+                <h1 class="mb-5"><a href="#" >Tüm Nakliyatlarım</a></h1>
+            </div>
+            <div class="row g-4">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-primary">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Resim</th>
+                        <th scope="col">Nereden</th>
+                        <th scope="col">Nereye</th>
+                        <th scope="col">Yük Tipi</th>
+                        <th scope="col">Kapasite</th>
+                        <th scope="col">Sevk Tarihi</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="news-table-body">
+                    <!-- Dinamik içerik buraya gelecek -->
+                    </tbody>
+                </table>
+                <!-- Yeni Ekle Butonu -->
+                <div class="text-end mt-3">
+                    <button class="btn btn-primary" id="addNewsBtn" onclick="openTripSave('-1')">
+                        <i class="fas fa-plus"></i> Yeni Nakliyat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Trip End -->
+
+
+
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="js/carrier.js"></script>
+    <script>
+        $(document).ready(function() {
+            fetchTrips();
+            getUserMenu();
+            getUserName();
+        });
+
+    </script>
+</body>
+
+</html>
